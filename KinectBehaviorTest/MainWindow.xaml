@@ -1,0 +1,117 @@
+﻿<Window x:Class="KinectBehaviorTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d3="http://research.microsoft.com/DynamicDataDisplay/1.0" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="960" Width="1240">
+    <Grid>
+
+
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="DepthDiff" Margin="10,10,0,0" FontSize="32" Width="100" />
+                <TextBlock x:Name="TimeElapsed" Margin="10,10,0,0" FontSize="32"  Width="300"/>
+                <TextBlock x:Name="Counter" Margin="10,10,0,0" FontSize="32"  Width="150"/>
+                <TextBox Text="TimeIn" Margin="10,10,0,0" Width="50"></TextBox>
+                <TextBox Name="TimeInDisp" Margin="10,10,0,0" Width="75"></TextBox>
+                <TextBlock x:Name="DebugTest" Width="50"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBox Text="xMarginLeft" Margin="10,10,0,0" Width="75"></TextBox>
+                <TextBox Name="xMarginLeftDisp" Margin="0,10,10,0" Width="75"></TextBox>
+                <TextBox Text="xMarginRight" Margin="0,10,0,0" Width="75"></TextBox>
+                <TextBox Name="xMarginRightDisp" Margin="0,10,10,0" Width="75"></TextBox>
+                <TextBox Text="yMarginTop" Margin="0,10,0,0" Width="75"></TextBox>
+                <TextBox Name="yMarginTopDisp" Margin="0,10,10,0" Width="75"></TextBox>
+                <TextBox Text="yMarginBot" Margin="0,10,0,0" Width="75"></TextBox>
+                <TextBox Name="yMarginBottomDisp" Margin="0,10,10,0" Width="75"></TextBox>
+                <TextBox Text="CountThresh" Margin="0,10,0,0" Width="75"></TextBox>
+                <TextBox Name="CountThreshDisp" Margin="0,10,10,0" Width="75"></TextBox>
+                <TextBox Text="loDepth" Margin="0,10,0,0" Width="75"></TextBox>
+                <TextBox Name="loDepthDisp" Margin="0,10,10,0" Width="75"></TextBox>
+                <TextBox Text="hiDepth" Margin="0,10,0,0" Width="75"></TextBox>
+                <TextBox Name="hiDepthDisp" Margin="0,10,10,0" Width="75"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Slider x:Name="xQuadMarginSliderL"  Margin="0,10,10,0" ValueChanged="xMarginLeft_ValChange" Minimum="0" Maximum="640" Height="35" Width="150"/>
+                <Slider x:Name="xQuadMarginSliderR"  Margin="10,10,10,0" ValueChanged="xMarginRight_ValChange" Minimum="0" Maximum="640" Height="35" Width="150"/>
+                <Slider x:Name="yQuadMarginSliderT"  Margin="0,10,10,0" ValueChanged="yMarginTop_ValChange" Minimum="0" Maximum="480" Height="35" Width="150"/>
+                <Slider x:Name="yQuadMarginSliderB"  Margin="0,10,10,0" ValueChanged="yMarginBottom_ValChange" Minimum="0" Maximum="480" Height="35" Width="150"/>
+
+                <Slider x:Name="threshSlider"  Margin="0,10,10,0" ValueChanged="threshSlider_ValChange" Minimum="50" Maximum="600" Height="35" Width="150"/>
+                <Slider x:Name="loDepthSlider"  Margin="0,10,10,0" ValueChanged="loDepthSlider_ValChange" Minimum="500" Maximum="2100" Height="35" Width="150"/>
+                <Slider x:Name="hiDepthSlider"  Margin="0,10,10,0" ValueChanged="hiDepthSlider_ValChange" Minimum="1000" Maximum="3000" Height="35" Width="150"/>
+                <Button Content="SaveSettings" Click="SaveSettingsButton"  Height="35" Margin="0,0,0,0" Width="100"/>
+
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+
+                <Image x:Name="DepthImageModified" Height="480" Width="620"/>
+                <Image x:Name="ColorImageElement" Height="480" Width="620"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+
+                <Button Content="FeederTest" Margin="700,0,50,0" Click="FreeTreatFeederTest"/>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock  x:Name="moveValue1" Height="32" Margin="781,10,0,0" TextWrapping="Wrap" Text="0" Width="50"/>
+                    <TextBlock  x:Name="moveValue2" Height="32" Margin="0,10,0,0" TextWrapping="Wrap" Text="0" Width="50"/>
+                    <TextBlock  x:Name="moveValue3" Height="32" Margin="0,10,0,0" TextWrapping="Wrap" Text="0" Width="50"/>
+                    <TextBlock  x:Name="moveValue4" Height="32" Margin="0,10,0,0" TextWrapping="Wrap" Text="0" Width="50"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock x:Name="moveValue5" Height="32" Margin="781,0,0,0" TextWrapping="Wrap" Text="0" Width="50"/>
+                    <TextBlock x:Name="moveValue6" Height="32" Margin="0,0,0,0" TextWrapping="Wrap" Text="0" Width="50"/>
+                    <TextBlock x:Name="moveValue7" Height="32" Margin="0,0,0,0" TextWrapping="Wrap" Text="0" Width="50"/>
+                    <TextBlock x:Name="moveValue8" Height="32" Margin="0,0,0,0" TextWrapping="Wrap" Text="0" Width="50"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock x:Name="moveValue9" Height="32" Margin="781,0,0,0" TextWrapping="Wrap" Text="0" Width="50"/>
+                    <TextBlock x:Name="moveValue10" Height="32" Margin="0,0,0,0" TextWrapping="Wrap" Text="0" Width="50"/>
+                    <TextBlock x:Name="moveValue11" Height="32" Margin="0,0,0,0" TextWrapping="Wrap" Text="0" Width="50"/>
+                    <TextBlock x:Name="moveValue12" Height="32" Margin="0,0,0,0" TextWrapping="Wrap" Text="0" Width="50"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock x:Name="moveValue13" Height="32" Margin="781,0,0,0" TextWrapping="Wrap" Text="0" Width="50"/>
+                    <TextBlock x:Name="moveValue14" Height="32" Margin="0,0,0,0" TextWrapping="Wrap" Text="0" Width="50"/>
+                    <TextBlock x:Name="moveValue15" Height="32" Margin="0,0,0,0" TextWrapping="Wrap" Text="0" Width="50"/>
+                    <TextBlock x:Name="moveValue16" Height="32" Margin="0,0,0,0" TextWrapping="Wrap" Text="0" Width="50"/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+        <Rectangle x:Name="targetline" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="5"  Stroke="Red" Width="300" VerticalAlignment="Bottom"/>
+
+        <StackPanel Orientation="Horizontal">
+            <Rectangle x:Name ="Rect1" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="10"                   Stroke="Black" VerticalAlignment="Bottom" Width="12"/>
+            <Rectangle x:Name ="Rect2" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="10" Stroke="Black" VerticalAlignment="Bottom" Width="12"/>
+            <Rectangle x:Name ="Rect3" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="10"  Stroke="Black" VerticalAlignment="Bottom" Width="12"/>
+            <Rectangle x:Name ="Rect4" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="10"  Stroke="Black" VerticalAlignment="Bottom" Width="12"/>
+            <Rectangle x:Name ="Rect5" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="10"  Stroke="Black" VerticalAlignment="Bottom" Width="12"/>
+            <Rectangle x:Name ="Rect6" Uid="6" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="10"  Stroke="Black" VerticalAlignment="Bottom" Width="12"/>
+            <Rectangle x:Name ="Rect7" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="10"    Stroke="Black" VerticalAlignment="Bottom" Width="12" />
+            <Rectangle x:Name ="Rect8" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="10"    Stroke="Black" VerticalAlignment="Bottom" Width="12"/>
+            <Rectangle x:Name ="Rect9" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="10"    Stroke="Black" VerticalAlignment="Bottom" Width="12"/>
+            <Rectangle x:Name ="Rect10" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="10"  Stroke="Black" VerticalAlignment="Bottom" Width="12"/>
+            <Rectangle x:Name ="Rect11" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="10" Stroke="Black" VerticalAlignment="Bottom" Width="12"/>
+            <Rectangle x:Name ="Rect12" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="10"  Stroke="Black" VerticalAlignment="Bottom" Width="12"/>
+            <Rectangle x:Name ="Rect13" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="10"  Stroke="Black" VerticalAlignment="Bottom" Width="12" />
+            <Rectangle x:Name ="Rect14" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="10"  Stroke="Black" VerticalAlignment="Bottom" Width="12"/>
+            <Rectangle x:Name ="Rect15" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="10"  Stroke="Black" VerticalAlignment="Bottom" Width="12"/>
+            <Rectangle x:Name ="Rect16" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="10"  Stroke="Black" VerticalAlignment="Bottom" Width="12"/>
+            <Rectangle x:Name ="Rect17" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="10"  Stroke="Black" VerticalAlignment="Bottom" Width="12"/>
+            <Rectangle x:Name ="Rect18" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="10"  Stroke="Black" VerticalAlignment="Bottom" Width="12"/>
+            <Rectangle x:Name ="Rect19" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="10"  Stroke="Black" VerticalAlignment="Bottom" Width="12"/>
+            <Rectangle x:Name ="Rect20" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="10"  Stroke="Black" VerticalAlignment="Bottom" Width="12"/>
+            <Rectangle x:Name ="Rect21" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="10"  Stroke="Black" VerticalAlignment="Bottom" Width="12"/>
+            <Rectangle x:Name ="Rect22" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="10"  Stroke="Black" VerticalAlignment="Bottom" Width="12"/>
+            <Rectangle x:Name ="Rect23" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="10"  Stroke="Black" VerticalAlignment="Bottom" Width="12"/>
+            <Rectangle x:Name ="Rect24" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="10"  Stroke="Black" VerticalAlignment="Bottom" Width="12"/>
+            <Rectangle x:Name ="Rect25" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="10"  Stroke="Black" VerticalAlignment="Bottom" Width="12"/>
+            <StackPanel Orientation="Vertical">
+                <TextBox Text="Events Needed"  Margin="10,750,10,0" Width="90"></TextBox>
+                <TextBox x:Name="EventNumVal" Margin="10,0,10,0" Width="75"></TextBox>
+                <Slider x:Name="EventNumNeeded_Slider"  Margin="10,0,10,10"   Minimum="1" Maximum="6" Width="90" VerticalAlignment="Bottom"/>
+            </StackPanel>
+        </StackPanel>
+
+    </Grid>
+</Window>
