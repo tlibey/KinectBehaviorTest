@@ -166,7 +166,7 @@ namespace KinectBehaviorTest
                     quadMarginYB = Convert.ToInt16(sr.ReadLine());
                 }
             }
-
+            saveSettings();
             xQuadMarginSliderR.Value = quadMarginXR;
             xQuadMarginSliderL.Value = quadMarginXL;
             yQuadMarginSliderT.Value = quadMarginYT;
@@ -688,11 +688,17 @@ namespace KinectBehaviorTest
             hiThreshold = (int)hiDepthSlider.Value;
             hiDepthDisp.Text = string.Format("{0} mm", hiThreshold);
         }
-       
+
 
 
         public void SaveSettingsButton(object sender, EventArgs a)
         {
+            saveSettings();
+        }
+
+        private void saveSettings()
+        {
+
             if (File.Exists(sfileName))
             {
                 File.Delete(sfileName);
@@ -724,6 +730,7 @@ namespace KinectBehaviorTest
                 file.WriteLine(quadMarginYB);
 
             }
+
         }
 
         #endregion Properties
