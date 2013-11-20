@@ -114,7 +114,7 @@ namespace KinectBehaviorTest
         
 
         //for low resource
-        bool lowResource = true;
+        bool lowResource = false;
         int rectholder1 = 0;
         int rectholder2 = 0;
         int rectholder3 = 0;
@@ -155,16 +155,20 @@ namespace KinectBehaviorTest
             // lothresh, hithresh, yslider, xslider, threshslider
             if (File.Exists(recentSettingsFileName))
             {
-                using (StreamReader sr = new StreamReader(recentSettingsFileName))
+                try
                 {
-                    CountThresh = Convert.ToDouble(sr.ReadLine());
-                    loThreshold = Convert.ToInt16(sr.ReadLine());
-                    hiThreshold = Convert.ToInt16(sr.ReadLine());
-                    quadMarginXR = Convert.ToInt16(sr.ReadLine());
-                    quadMarginXL = Convert.ToInt16(sr.ReadLine());
-                    quadMarginYT = Convert.ToInt16(sr.ReadLine());
-                    quadMarginYB = Convert.ToInt16(sr.ReadLine());
+                    using (StreamReader sr = new StreamReader(recentSettingsFileName))
+                    {
+                        CountThresh = Convert.ToDouble(sr.ReadLine());
+                        loThreshold = Convert.ToInt16(sr.ReadLine());
+                        hiThreshold = Convert.ToInt16(sr.ReadLine());
+                        quadMarginXR = Convert.ToInt16(sr.ReadLine());
+                        quadMarginXL = Convert.ToInt16(sr.ReadLine());
+                        quadMarginYT = Convert.ToInt16(sr.ReadLine());
+                        quadMarginYB = Convert.ToInt16(sr.ReadLine());
+                    }
                 }
+                catch (Exception ex) { Console.Write(ex); };
             }
             saveSettings();
             xQuadMarginSliderR.Value = quadMarginXR;
@@ -707,17 +711,20 @@ namespace KinectBehaviorTest
             {
                 File.Delete(recentSettingsFileName);
             }
-
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter(recentSettingsFileName, true))
+            try
             {
-                file.WriteLine(CountThresh);
-                file.WriteLine(loThreshold);
-                file.WriteLine(hiThreshold);
-                file.WriteLine(quadMarginXR);
-                file.WriteLine(quadMarginXL);
-                file.WriteLine(quadMarginYT);
-                file.WriteLine(quadMarginYB);
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(recentSettingsFileName, true))
+                {
+                    file.WriteLine(CountThresh);
+                    file.WriteLine(loThreshold);
+                    file.WriteLine(hiThreshold);
+                    file.WriteLine(quadMarginXR);
+                    file.WriteLine(quadMarginXL);
+                    file.WriteLine(quadMarginYT);
+                    file.WriteLine(quadMarginYB);
+                }
             }
+            catch (Exception ex) { Console.Write(ex); };
 
             using (System.IO.StreamWriter file = new System.IO.StreamWriter(sfileName, true))
             {
